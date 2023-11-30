@@ -1,34 +1,32 @@
 version: '3.7'
-
 services:
-  postgres:
-    image: postgres:alpine
+  mysql:
+    image: mysql:8.2.0
+    container_name: mysql
     environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_DB: postgres
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
     ports:
-      - 5432:5432
+      - 3306:3306
     healthcheck:
-      test: ['CMD', 'pg_isready', '-U', 'postgres']
-      interval: 5s
-      timeout: 5s
-      retries: 5
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+      interval: 1s
+      timeout: 3s
+      retries: 10
     volumes:
-      - postgres:/var/lib/postgresql/data
-
+      - mysql:/var/lib/mysql
   web:
-    image: leemhoon00/goorm-mission-1:v5
+    image: leemhoon00/goorm-mission-2:v1
+    container_name: web
     environment:
-      DB_HOST: postgres
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-      DB_DATABASE: postgres
-      DB_PORT: 5432
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_DATABASE: test
+      DB_PORT: 3306
     ports:
       - 80:3000
     depends_on:
-      - postgres
-
+      - mysql
 volumes:
-  postgres:
+  mysql:

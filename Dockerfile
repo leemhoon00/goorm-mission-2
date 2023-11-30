@@ -1,4 +1,4 @@
-FROM node as builder
+FROM node:lts-alpine as builder
 
 WORKDIR /usr/src/app
 
@@ -9,7 +9,7 @@ RUN npm run build
 RUN rm -rf node_modules
 RUN npm install --production
 
-FROM node:alpine as production
+FROM node:lts-alpine as production
 
 WORKDIR /usr/src/app
 
