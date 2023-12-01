@@ -38,9 +38,10 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 1Gi
+      storage: 5Gi
   accessModes:
     - ReadWriteOnce
+  storageClassName: gp2
 ---
 apiVersion: apps/v1
 kind: Deployment
