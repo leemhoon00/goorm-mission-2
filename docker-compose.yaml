@@ -16,7 +16,7 @@ services:
     volumes:
       - mysql:/var/lib/mysql
   web:
-    image: leemhoon00/goorm-mission-2:v1
+    image: leemhoon00/goorm-mission-2:v2
     container_name: web
     environment:
       DB_HOST: mysql

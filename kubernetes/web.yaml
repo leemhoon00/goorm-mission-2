@@ -46,3 +46,12 @@ spec:
           envFrom:
             - configMapRef:
                 name: web
+      initContainers:
+        - name: check-mysql
+          image: busybox
+          command:
+            [
+              'sh',
+              '-c',
+              'until telnet mysql 3306; do echo waiting for mysql; sleep 2; done;',
+            ]
