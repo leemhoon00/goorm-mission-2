@@ -18,16 +18,16 @@ managedNodeGroups:
     disablePodIMDS: false
     iam:
       withAddonPolicies:
-        albIngress: false
+        albIngress: true
         appMesh: false
         appMeshPreview: false
         autoScaler: false
-        awsLoadBalancerController: false
+        awsLoadBalancerController: true
         certManager: false
         cloudWatch: false
-        ebs: false
+        ebs: true
         efs: false
-        externalDNS: false
+        externalDNS: true
         fsx: false
         imageBuilder: false
         xRay: false
