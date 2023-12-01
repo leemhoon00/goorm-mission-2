@@ -1,14 +1,7 @@
 apiVersion: eksctl.io/v1alpha5
-availabilityZones:
-  - ap-northeast-2b
-  - ap-northeast-2a
-  - ap-northeast-2d
+kind: ClusterConfig
 cloudWatch:
   clusterLogging: {}
-iam:
-  vpcResourceControllerPolicy: true
-  withOIDC: false
-kind: ClusterConfig
 kubernetesNetworkConfig:
   ipFamily: IPv4
 managedNodeGroups:
@@ -19,18 +12,18 @@ managedNodeGroups:
     iam:
       withAddonPolicies:
         albIngress: true
-        appMesh: false
-        appMeshPreview: false
-        autoScaler: false
+        appMesh: true
+        appMeshPreview: true
+        autoScaler: true
         awsLoadBalancerController: true
-        certManager: false
-        cloudWatch: false
+        certManager: true
+        cloudWatch: true
         ebs: true
-        efs: false
+        efs: true
         externalDNS: true
-        fsx: false
-        imageBuilder: false
-        xRay: false
+        fsx: true
+        imageBuilder: true
+        xRay: true
     instanceSelector: {}
     labels:
       alpha.eksctl.io/cluster-name: my-cluster
@@ -44,13 +37,12 @@ managedNodeGroups:
       withLocal: null
       withShared: null
     ssh:
-      allow: false
-      publicKeyPath: ''
+      enableSsm: true
     tags:
       alpha.eksctl.io/nodegroup-name: ng-4371a5e7
       alpha.eksctl.io/nodegroup-type: managed
     volumeIOPS: 3000
-    volumeSize: 40
+    volumeSize: 20
     volumeThroughput: 125
     volumeType: gp3
 metadata:
