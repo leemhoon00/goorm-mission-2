@@ -36,11 +36,11 @@ spec:
     spec:
       containers:
         - name: web
-          image: leemhoon00/goorm-mission-2:v1
+          image: leemhoon00/goorm-mission-2:v2
           resources:
             limits:
               memory: '256Mi'
-              cpu: '500m'
+              cpu: '200m'
           ports:
             - containerPort: 3000
           envFrom:

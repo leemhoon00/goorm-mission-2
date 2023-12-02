@@ -1,54 +1,63 @@
 apiVersion: eksctl.io/v1alpha5
-kind: ClusterConfig
+availabilityZones:
+- ap-northeast-2b
+- ap-northeast-2c
+- ap-northeast-2d
 cloudWatch:
   clusterLogging: {}
+iam:
+  vpcResourceControllerPolicy: true
+  withOIDC: true
+kind: ClusterConfig
 kubernetesNetworkConfig:
   ipFamily: IPv4
 managedNodeGroups:
-  - amiFamily: AmazonLinux2
-    desiredCapacity: 1
-    disableIMDSv1: true
-    disablePodIMDS: false
-    iam:
-      withAddonPolicies:
-        albIngress: true
-        appMesh: true
-        appMeshPreview: true
-        autoScaler: true
-        awsLoadBalancerController: true
-        certManager: true
-        cloudWatch: true
-        ebs: true
-        efs: true
-        externalDNS: true
-        fsx: true
-        imageBuilder: true
-        xRay: true
-    instanceSelector: {}
-    labels:
-      alpha.eksctl.io/cluster-name: my-cluster
-      alpha.eksctl.io/nodegroup-name: ng-4371a5e7
-    maxSize: 1
-    minSize: 1
-    name: ng-4371a5e7
-    privateNetworking: false
-    releaseVersion: ''
-    securityGroups:
-      withLocal: null
-      withShared: null
-    ssh:
-      enableSsm: true
-    tags:
-      alpha.eksctl.io/nodegroup-name: ng-4371a5e7
-      alpha.eksctl.io/nodegroup-type: managed
-    volumeIOPS: 3000
-    volumeSize: 20
-    volumeThroughput: 125
-    volumeType: gp3
+- amiFamily: AmazonLinux2
+  desiredCapacity: 1
+  disableIMDSv1: true
+  disablePodIMDS: false
+  iam:
+    withAddonPolicies:
+      albIngress: true
+      appMesh: false
+      appMeshPreview: false
+      autoScaler: false
+      awsLoadBalancerController: true
+      certManager: true
+      cloudWatch: true
+      ebs: true
+      efs: false
+      externalDNS: true
+      fsx: false
+      imageBuilder: false
+      xRay: false
+  instanceSelector: {}
+  instanceType: t3.medium
+  labels:
+    alpha.eksctl.io/cluster-name: my-cluster
+    alpha.eksctl.io/nodegroup-name: ng-5dba1d11
+  maxSize: 1
+  minSize: 1
+  name: ng-5dba1d11
+  privateNetworking: false
+  releaseVersion: ""
+  securityGroups:
+    withLocal: null
+    withShared: null
+  ssh:
+    allow: true
+    publicKeyPath: kube-client-ssh
+  tags:
+    alpha.eksctl.io/nodegroup-name: ng-5dba1d11
+    alpha.eksctl.io/nodegroup-type: managed
+  volumeIOPS: 3000
+  volumeSize: 20
+  volumeThroughput: 125
+  volumeType: gp3
 metadata:
   name: my-cluster
   region: ap-northeast-2
-  version: '1.27'
+  version: "1.27"
 privateCluster:
   enabled: false
   skipEndpointCreation: false
