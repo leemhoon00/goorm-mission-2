@@ -35,3 +35,6 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 .env
+
+iam_policy.json
+v2_5_4*
