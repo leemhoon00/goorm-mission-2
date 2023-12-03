@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: web
+          image: leemhoon00/goorm-mission-2:v2
+          resources:
+            limits:
+              memory: '256Mi'
+              cpu: '200m'
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: web
+      initContainers:
+        - name: check-mysql
+          image: busybox
+          command:
+            [
+              'sh',
+              '-c',
+              'until telnet mysql 3306; do echo waiting for mysql; sleep 2; done;',
+            ]
